@@ -8,7 +8,7 @@ export class CaretStringIterator {
     }
 
     public beforeCaret(): boolean {
-        return this.currentIndex < this.caretString.caretPosition
+        return this.currentIndex <= this.caretString.caretPosition
             || (this.currentIndex === 0 && this.caretString.caretPosition === 0);
     }
 

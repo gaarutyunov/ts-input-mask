@@ -109,7 +109,7 @@ export class Mask {
         let state: State | null = this.initialState;
         let length = 0;
 
-        while (state !== null && state ! instanceof EOLState) {
+        while (!!state && !(state instanceof EOLState)) {
             if (
                 state instanceof FixedState
                 || state instanceof FreeState
@@ -126,7 +126,7 @@ export class Mask {
         let state: State | null = this.initialState;
         let length = 0;
 
-        while (state !== null && state ! instanceof EOLState) {
+        while (!!state && !(state instanceof EOLState)) {
             if (
                 state instanceof FixedState
                 || state instanceof FreeState
@@ -144,7 +144,7 @@ export class Mask {
         let state: State | null = this.initialState;
         let length = 0;
 
-        while (state !== null && state ! instanceof EOLState) {
+        while (!!state && !(state instanceof EOLState)) {
             if (
                 state instanceof FixedState
                 || state instanceof ValueState
@@ -160,7 +160,7 @@ export class Mask {
         let state: State | null = this.initialState;
         let length = 0;
 
-        while (state !== null && state ! instanceof EOLState) {
+        while (!!state && !(state instanceof EOLState)) {
             if (
                 state instanceof FixedState
                 || state instanceof ValueState

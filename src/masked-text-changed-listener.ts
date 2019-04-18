@@ -5,7 +5,7 @@ import {
 } from './helper/affinity-calculation-strategy';
 import {Mask} from './helper/mask';
 import {MaskAffinity} from './helper/mask-affinity';
-import { InputEvent } from 'inputEvent';
+import { InputEvent } from 'input-event';
 
 export class MaskedTextChangedListener {
     private readonly primaryMask = Mask.getOrCreate(this.primaryFormat, this.customNotations);
