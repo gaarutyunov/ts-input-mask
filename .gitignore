@@ -10,6 +10,7 @@ test-args.txt
 ~*.docx
 \#*\#
 .\#*
+.nyc_output/
 tests/baselines/local/*
 tests/baselines/local.old/*
 tests/services/baselines/local/*

@@ -6,7 +6,7 @@ export class FormatSanitizer {
             const blocks: Array<String> = FormatSanitizer.divideBlocksWithMixedCharacters(FormatSanitizer.getFormatBlocks(formatString));
             return FormatSanitizer.sortFormatBlocks(blocks).join('');
         } catch (e) {
-            throw new Error("Wrong Format");
+            throw new Error("Wrong format");
         }
     }
 
@@ -70,6 +70,20 @@ export class FormatSanitizer {
                         if (
                             blockBuffer.contains('A')
                             || blockBuffer.contains('a')
+                            || blockBuffer.contains('-')
+                            || blockBuffer.contains('_')
+                        ) {
+                            blockBuffer += ']';
+                            resultingBlocks.push(blockBuffer);
+                            blockBuffer = `[${blockCharacter}`;
+                            continue;
+                        }
+                    }
+
+                    if (blockCharacter === 'A' || blockCharacter === 'a') {
+                        if (
+                            blockBuffer.contains('0')
+                            || blockBuffer.contains('9')
                             || blockBuffer.contains('-')
                             || blockBuffer.contains('_')
                         ) {
@@ -159,7 +173,7 @@ export class FormatSanitizer {
 
             if (char === '[') {
                 if (squareBraceOpen) {
-                    throw new Error("Wrong Format");
+                    throw new Error("Wrong format");
                 }
                 squareBraceOpen = !escape;
             }
@@ -170,7 +184,7 @@ export class FormatSanitizer {
 
             if (char === '{') {
                 if (curlyBraceOpen) {
-                    throw new Error("Wrong Format");
+                    throw new Error("Wrong format");
                 }
                 curlyBraceOpen = !escape;
             }
