@@ -2,16 +2,20 @@ import {assert} from 'chai';
 import {bdd, runTest} from 'mocha-classes';
 import {CaretString, Mask} from '../src';
 import {performance} from 'perf_hooks';
+import '../src/util/input-event';
 
 describe('PhoneSpec', () => {
     const format = '+7 ([000]) [000]-[00]-[00]';
-    const newMask: Mask = new Mask(format);
-    const placeholder: String = newMask.placeholder();
+    const mask: Mask = new Mask(format);
+    const placeholder: String = mask.placeholder();
 
     it('measure new Mask() time', () => {
         const t0 = performance.now();
+        const masks: Mask[] = [];
 
-        const mask: Mask = new Mask(format);
+        for (const i of new Array(1000).fill(0)) {
+            masks.push(new Mask(format));
+        }
 
         const t1 = performance.now();
 
@@ -21,7 +25,11 @@ describe('PhoneSpec', () => {
     it('measure getOrCreate time', () => {
         const t0 = performance.now();
 
-        const mask: Mask = Mask.getOrCreate(format, []);
+        const masks: Mask[] = [];
+
+        for (const i of new Array(1000).fill(0)) {
+            masks.push(Mask.getOrCreate(format, []));
+        }
 
         const t1 = performance.now();
 
@@ -29,7 +37,7 @@ describe('PhoneSpec', () => {
     });
 
     it('#new Mask should initialize mask', () => {
-        assert.isNotNull(newMask);
+        assert.isNotNull(mask);
     });
 
     it('#Mask.placeholder() should return correct placeholder', () => {
@@ -37,22 +45,22 @@ describe('PhoneSpec', () => {
     });
 
     it('#Mask.acceptableTextLength() should return correct count', () => {
-        const acceptableTextLength: number = newMask.acceptableTextLength();
+        const acceptableTextLength: number = mask.acceptableTextLength();
         assert.equal(acceptableTextLength, 18);
     });
 
     it('#Mask.totalTextLength() should return correct count', () => {
-        const totalTextLength: number = newMask.totalTextLength();
+        const totalTextLength: number = mask.totalTextLength();
         assert.equal(totalTextLength, 18);
     });
 
     it('#Mask.acceptableValueLength() should return correct count', () => {
-        const acceptableValueLength: number = newMask.acceptableValueLength();
+        const acceptableValueLength: number = mask.acceptableValueLength();
         assert.equal(acceptableValueLength, 10);
     });
 
     it('#Mask.totalValueLength() should return correct count', () => {
-        const totalValueLength: number = newMask.totalValueLength();
+        const totalValueLength: number = mask.totalValueLength();
         assert.equal(totalValueLength, 10);
     });
 
@@ -64,7 +72,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -81,7 +89,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -98,7 +106,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -115,7 +123,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -132,7 +140,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '1';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -149,7 +157,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '12';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -166,7 +174,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '123';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -183,7 +191,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '123';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -200,7 +208,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '123';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -217,7 +225,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '1234';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -234,7 +242,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '12345';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -251,7 +259,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '123456';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -268,7 +276,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '123456';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -285,7 +293,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '1234567';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -302,7 +310,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '12345678';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -319,7 +327,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '12345678';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -336,7 +344,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '123456789';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -353,7 +361,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '1234567890';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -370,7 +378,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -387,7 +395,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '9';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -404,7 +412,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '1234567890';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -421,7 +429,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '1234567890';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -438,7 +446,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '1234567890';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), false);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -455,7 +463,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), true);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -472,7 +480,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), true);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -489,7 +497,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), true);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
@@ -506,7 +514,7 @@ describe('PhoneSpec', () => {
        const expectedCaret: number = expectedString.length;
        const expectedValue = '';
 
-       const result: Mask.Result = newMask.apply(new CaretString(inputString, inputCaret), true);
+       const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
        assert.equal(expectedString, result.formattedText.string);
        assert.equal(expectedCaret, result.formattedText.caretPosition);
