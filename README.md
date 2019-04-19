@@ -33,10 +33,10 @@ npm install inputmask --save
 #### 1. Import the listener
 
 ```
-var MaskedTextChangedListener = require('masked-input');
+var MaskedTextChangedListener = require('ts-input-mask');
 
 //es6
-import { MaskedTextChangedListener } from 'masked-input';
+import { MaskedTextChangedListener } from 'ts-input-mask';
 ```
 
 #### 2. Create instance of the listener
@@ -82,7 +82,7 @@ npm run test:coverage
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/gaarutyunov/masked-input/blob/master/LICENSE) 
+This project is licensed under the [MIT License](https://github.com/gaarutyunov/ts-input-mask/blob/master/LICENSE) 
 
 ## Acknowledgments
 
