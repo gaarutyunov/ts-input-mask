@@ -30,7 +30,7 @@ npm install inputmask --save
 
 ## Usage
 
-####1. Import the listener
+#### 1. Import the listener
 
 ```
 var MaskedTextChangedListener = require('masked-input');
@@ -39,7 +39,7 @@ var MaskedTextChangedListener = require('masked-input');
 import { MaskedTextChangedListener } from 'masked-input';
 ```
 
-####2. Create instance of the listener
+#### 2. Create instance of the listener
 
 ```
 const listener: MaskedTextChangedListener = new MaskedTextChangedListener(
@@ -64,13 +64,13 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 
-####Testing
+#### Testing
 
 ```
 npm run test
 ```
 
-####Testing with coverage:
+#### Testing with coverage:
 
 ```
 npm run test:coverage
