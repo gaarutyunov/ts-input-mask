@@ -1,6 +1,8 @@
 import {Compiler} from '../src/helper/compiler';
 import {EOLState, FixedState, FreeState, OptionalValueState, State, ValueState} from '../src/model';
 import {assert} from 'chai';
+import {Mask} from '../src';
+import '../src/util/input-event';
 
 describe('Compiler', () => {
     it('should return correct state', () => {
@@ -45,5 +47,17 @@ describe('Compiler', () => {
 
     it('should throw error', () => {
         assert.throws(() => new Compiler([]).compile('[00[9]9]'), 'Wrong format');
+    });
+
+    it('should compile with escape', () => {
+        const initialState: State = new Compiler([]).compile('\\[09]{.}');
+        let state: State = initialState;
+        const stateList: Array<State> = [];
+
+        while (!!state && !(state instanceof EOLState)) {
+            stateList.push(state);
+            state = state.child;
+        }
+        console.log(new Mask('\\[09]{.}').placeholder());
     });
 });

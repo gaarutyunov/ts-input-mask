@@ -18,4 +18,14 @@ describe('FormatSanitizer', () => {
         const actualString = FormatSanitizer.sanitize('[09Aa_-]');
         assert.equal(expectedString, actualString);
     });
+
+    it('should throw error with two opened curly braces', () => {
+        assert.throws(() => FormatSanitizer.sanitize('{{.'), 'Wrong format');
+    });
+
+    it('should include bracket if escaped', () => {
+        const expectedString = '\\[0909]';
+        const actualString = FormatSanitizer.sanitize('\\[0909]');
+        assert.equal(expectedString, actualString);
+    });
 });

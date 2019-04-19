@@ -5,23 +5,32 @@ import {
 } from './helper/affinity-calculation-strategy';
 import {Mask} from './helper/mask';
 import {MaskAffinity} from './helper/mask-affinity';
-import { InputEvent } from 'input-event';
+import {InputEvent} from 'input-event';
 
 export class MaskedTextChangedListener {
+    protected readonly affineFormats: ReadonlyArray<String> = [];
+    protected readonly customNotations: ReadonlyArray<Notation> = [];
+    protected readonly affinityCalculationStrategy: AffinityCalculation =
+        new AffinityCalculation(AffinityCalculationStrategy.WHOLE_STRING);
+    protected readonly autocomplete: boolean = true;
     private readonly primaryMask = Mask.getOrCreate(this.primaryFormat, this.customNotations);
     private afterText: String = '';
     private caretPosition = 0;
 
     constructor(
         protected readonly primaryFormat: String,
-        protected readonly affineFormats: ReadonlyArray<String> = [],
-        protected readonly customNotations: ReadonlyArray<Notation> = [],
-        protected readonly affinityCalculationStrategy: AffinityCalculation =
+        private field: HTMLInputElement,
+        protected readonly listener?: MaskedTextChangedListener.ValueListener,
+        affineFormats: ReadonlyArray<String> = [],
+        customNotations: ReadonlyArray<Notation> = [],
+        affinityCalculationStrategy: AffinityCalculation =
             new AffinityCalculation(AffinityCalculationStrategy.WHOLE_STRING),
-        protected readonly autocomplete: boolean = true,
-        protected readonly listener: MaskedTextChangedListener.ValueListener,
-        private field: HTMLInputElement
+        autocomplete: boolean = true
     ) {
+        this.affineFormats = affineFormats;
+        this.customNotations = customNotations;
+        this.affinityCalculationStrategy = affinityCalculationStrategy;
+        this.autocomplete = autocomplete;
         this.addEvents(field);
     }
 
@@ -36,7 +45,9 @@ export class MaskedTextChangedListener {
             result = this._setText(text, this.field);
             this.afterText = result.formattedText.string;
             this.caretPosition = result.formattedText.caretPosition;
-            this.listener.onTextChanged(result.complete, result.extractedValue, this.afterText);
+            if (!!this.listener) {
+                this.listener.onTextChanged(result.complete, result.extractedValue, this.afterText);
+            }
         }
         return result;
     }
@@ -132,20 +143,22 @@ export class MaskedTextChangedListener {
         if (this.autocomplete && hasFocus) {
             const text: String = !!this.field.value ? this.field.value : '';
             const result: Mask.Result = this.pickMask(text, text.length, this.autocomplete).apply(
-              new CaretString(text, text.length),
-              this.autocomplete
+                new CaretString(text, text.length),
+                this.autocomplete
             );
 
             this.afterText = result.formattedText.string;
             this.caretPosition = result.formattedText.caretPosition;
             this.field.value = String(this.afterText);
             this.field.setSelectionRange(result.formattedText.caretPosition, result.formattedText.caretPosition);
-            this.listener.onTextChanged(result.complete, result.extractedValue, this.afterText);
+            if (!!this.listener) {
+                this.listener.onTextChanged(result.complete, result.extractedValue, this.afterText);
+            }
         }
     }
 
     private onTextChanged(text: String, event: Event): void {
-        const isDeletion = (<InputEvent>event).inputType === 'deleteContentForward' || (<InputEvent>event).inputType === 'deleteContentBackward';
+        const isDeletion = (<InputEvent> event).inputType === 'deleteContentForward' || (<InputEvent> event).inputType === 'deleteContentBackward';
         const caretPosition = isDeletion ? this.field.selectionStart : text.length;
         const result: Mask.Result = this.pickMask(text, caretPosition, this.autocomplete && !isDeletion).apply(
             new CaretString(text, caretPosition),
@@ -155,7 +168,9 @@ export class MaskedTextChangedListener {
         this.caretPosition = isDeletion ? this.field.selectionStart : result.formattedText.caretPosition;
         this.field.value = String(this.afterText);
         this.field.setSelectionRange(result.formattedText.caretPosition, result.formattedText.caretPosition);
-        this.listener.onTextChanged(result.complete, result.extractedValue, this.afterText);
+        if (!!this.listener) {
+            this.listener.onTextChanged(result.complete, result.extractedValue, this.afterText);
+        }
     }
 
 }

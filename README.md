@@ -1,2 +1,90 @@
 # masked-input
-TypeScript Input Mask library
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://badges.frapsoft.com/typescript/awesome/typescript.png?v=101)](https://github.com/ellerbrock/open-source-badge/)
+
+## Description
+
+Masked-input is a TypeScript library allowing to format user input on the fly. 
+
+Based on [RadMadRobot's Input Mask Library](https://github.com/RedMadRobot/input-mask-android)
+
+## Mask examples
+
+1. International phone numbers: `+1 ([000]) [000] [00] [00]`
+2. Local phone numbers: `([000]) [000]-[00]-[00]`
+3. Names: `[A][-----------------------------------------------------]` 
+4. Text: `[A…]`
+5. Dates: `[00]{.}[00]{.}[9900]`
+6. Serial numbers: `[AA]-[00000099]`
+7. IPv4: `[099]{.}[099]{.}[099]{.}[099]`
+8. Visa card numbers: `[0000] [0000] [0000] [0000]`
+9. MM/YY: `[00]{/}[00]`
+
+
+## Installation
+
+```
+npm install inputmask --save
+```
+
+## Usage
+
+####1. Import the listener
+
+```
+var MaskedTextChangedListener = require('masked-input');
+
+//es6
+import { MaskedTextChangedListener } from 'masked-input';
+```
+
+####2. Create instance of the listener
+
+```
+const listener: MaskedTextChangedListener = new MaskedTextChangedListener(
+    this._primaryFormat, \\ format of mask: +7 ([000]) [000]-[00]-[00]
+    input, \\ pass HTMLInputElement here document.createElement("input") to attach the listener
+    new class implements MaskedTextChangedListener.ValueListener {
+        public onTextChanged( \\ method called when value changes
+            maskFilled: boolean, \\ true when mask is filled
+            extractedValue: String, \\ text without placeholder: 1234567890
+            formattedText: String \\ text with placeholder +7 (123) 456-78-90
+        ): void {
+            console.log(maskFilled, extractedValue, formattedText);
+        }
+    }()
+);
+```
+
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+
+####Testing
+
+```
+npm run test
+```
+
+####Testing with coverage:
+
+```
+npm run test:coverage
+```
+
+## Authors
+
+* [**German Arutyunov**](https://github.com/gaarutyunov)
+
+## License
+
+This project is licensed under the [MIT License](https://github.com/gaarutyunov/masked-input/blob/master/LICENSE) 
+
+## Acknowledgments
+
+* RadMadRobot's Android [Input Mask Library](https://github.com/RedMadRobot/input-mask-android)
+* RadMadRobot's iOS [Input Mask Library](https://github.com/RedMadRobot/input-mask-ios)
