@@ -1,11 +1,11 @@
-# masked-input
+# ts-input-mask
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.png?v=101)](https://github.com/ellerbrock/typescript-badges/)
 
 ## Description
 
-Masked-input is a TypeScript library allowing to format user input on the fly. 
+`ts-input-mask` is a TypeScript library allowing to format user input on the fly. 
 
 Based on [RadMadRobot's Input Mask Library](https://github.com/RedMadRobot/input-mask-android)
 

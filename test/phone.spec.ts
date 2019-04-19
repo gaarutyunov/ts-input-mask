@@ -4,7 +4,7 @@ import {CaretString, Mask} from '../src';
 import {performance} from 'perf_hooks';
 import '../src/util/input-event';
 
-describe('PhoneSpec', () => {
+describe('Phone', () => {
     const format = '+7 ([000]) [000]-[00]-[00]';
     const mask: Mask = new Mask(format);
     const placeholder: String = mask.placeholder();
