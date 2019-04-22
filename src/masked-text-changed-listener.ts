@@ -34,9 +34,33 @@ export class MaskedTextChangedListener {
         this.addEvents(field);
     }
 
+    static installOn(
+        primaryFormat: String,
+        field: HTMLInputElement,
+        listener?: MaskedTextChangedListener.ValueListener,
+        affineFormats: ReadonlyArray<String> = [],
+        customNotations: ReadonlyArray<Notation> = [],
+        affinityCalculationStrategy: AffinityCalculation =
+            new AffinityCalculation(AffinityCalculationStrategy.WHOLE_STRING),
+        autocomplete: boolean = true
+    ): MaskedTextChangedListener {
+        return new MaskedTextChangedListener(
+            primaryFormat,
+            field,
+            listener,
+            affineFormats,
+            customNotations,
+            affinityCalculationStrategy,
+            autocomplete
+        );
+    }
+
     public placeholder = () => this.primaryMask.placeholder();
+
     public acceptableTextLength = () => this.primaryMask.acceptableTextLength();
+
     public totalTextLength = () => this.primaryMask.totalTextLength();
+
     public totalValueLength = () => this.primaryMask.totalValueLength();
 
     public setText(text: String): Mask.Result | null {
