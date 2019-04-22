@@ -42,18 +42,22 @@ import { MaskedTextChangedListener } from 'ts-input-mask';
 #### 2. Create instance of the listener
 
 ```
-const listener: MaskedTextChangedListener = new MaskedTextChangedListener(
-    this._primaryFormat, \\ format of mask: +7 ([000]) [000]-[00]-[00]
+const listener: MaskedTextChangedListener = MaskedTextChangedListener.installOn(
+    primaryFormat, \\ format of mask: +7 ([000]) [000]-[00]-[00]
     input, \\ pass HTMLInputElement here document.createElement("input") to attach the listener
     new class implements MaskedTextChangedListener.ValueListener {
         public onTextChanged( \\ method called when value changes
             maskFilled: boolean, \\ true when mask is filled
-            extractedValue: String, \\ text without placeholder: 1234567890
-            formattedText: String \\ text with placeholder +7 (123) 456-78-90
+            extractedValue: string, \\ text without placeholder: 1234567890
+            formattedText: string  \\ text with placeholder +7 (123) 456-78-90
         ): void {
             console.log(maskFilled, extractedValue, formattedText);
         }
-    }()
+    }(),
+    affineFormats,
+    customNotations,
+    affinityCalculationStrategy,
+    autocomplete
 );
 ```
 
@@ -88,3 +92,7 @@ This project is licensed under the [MIT License](https://github.com/gaarutyunov/
 
 * RadMadRobot's Android [Input Mask Library](https://github.com/RedMadRobot/input-mask-android)
 * RadMadRobot's iOS [Input Mask Library](https://github.com/RedMadRobot/input-mask-ios)
+
+## See also
+
+* [input-mask-angular](https://github.com/gaarutyunov/input-mask-angular) Simple implementation of this library as angular directive
