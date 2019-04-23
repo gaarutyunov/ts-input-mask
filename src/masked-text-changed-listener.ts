@@ -65,7 +65,7 @@ export class MaskedTextChangedListener {
 
     public setText(text: String): Mask.Result | null {
         let result: Mask.Result = null;
-        if (!!this.field.value) {
+        if (!this.field.value || this.field.value === '') {
             result = this._setText(text, this.field);
             this.afterText = result.formattedText.string;
             this.caretPosition = result.formattedText.caretPosition;
