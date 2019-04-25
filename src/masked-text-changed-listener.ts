@@ -182,16 +182,17 @@ export class MaskedTextChangedListener {
     }
 
     private onTextChanged(text: String, event: Event): void {
-        const isDeletion = (<InputEvent> event).inputType === 'deleteContentForward' || (<InputEvent> event).inputType === 'deleteContentBackward';
-        const caretPosition = isDeletion ? this.field.selectionStart : text.length;
+        const isDeletion: boolean = (<InputEvent> event).inputType === 'deleteContentForward' || (<InputEvent> event).inputType === 'deleteContentBackward';
+        const isInside: boolean = this.field.selectionStart < text.length;
+        const caretPosition = (isDeletion || isInside) ? this.field.selectionStart : text.length;
         const result: Mask.Result = this.pickMask(text, caretPosition, this.autocomplete && !isDeletion).apply(
             new CaretString(text, caretPosition),
             this.autocomplete && !isDeletion
         );
         this.afterText = result.formattedText.string;
-        this.caretPosition = isDeletion ? this.field.selectionStart : result.formattedText.caretPosition;
+        this.caretPosition = (isDeletion || isInside) ? this.field.selectionStart : result.formattedText.caretPosition;
         this.field.value = String(this.afterText);
-        this.field.setSelectionRange(result.formattedText.caretPosition, result.formattedText.caretPosition);
+        this.field.setSelectionRange(this.caretPosition, this.caretPosition);
         if (!!this.listener) {
             this.listener.onTextChanged(result.complete, result.extractedValue, this.afterText);
         }
