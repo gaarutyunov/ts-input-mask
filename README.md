@@ -25,7 +25,7 @@ Based on [RadMadRobot's Input Mask Library](https://github.com/RedMadRobot/input
 ## Installation
 
 ```
-npm install inputmask --save
+npm install ts-input-mask --save
 ```
 
 ## Usage
