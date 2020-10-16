@@ -8,11 +8,6 @@ import {MaskAffinity} from './helper/mask-affinity';
 import {InputEvent} from 'input-event';
 
 export class MaskedTextChangedListener {
-    protected readonly affineFormats: ReadonlyArray<String> = [];
-    protected readonly customNotations: ReadonlyArray<Notation> = [];
-    protected readonly affinityCalculationStrategy: AffinityCalculation =
-        new AffinityCalculation(AffinityCalculationStrategy.WHOLE_STRING);
-    protected readonly autocomplete: boolean = true;
     private readonly primaryMask = Mask.getOrCreate(this.primaryFormat, this.customNotations);
     private afterText: String = '';
     private caretPosition = 0;
@@ -21,11 +16,11 @@ export class MaskedTextChangedListener {
         protected readonly primaryFormat: String,
         private field: HTMLInputElement,
         protected readonly listener?: MaskedTextChangedListener.ValueListener,
-        affineFormats: ReadonlyArray<String> = [],
-        customNotations: ReadonlyArray<Notation> = [],
-        affinityCalculationStrategy: AffinityCalculation =
+        private affineFormats: ReadonlyArray<String> = [],
+        private customNotations: ReadonlyArray<Notation> = [],
+        private affinityCalculationStrategy: AffinityCalculation =
             new AffinityCalculation(AffinityCalculationStrategy.WHOLE_STRING),
-        autocomplete: boolean = true
+        protected autocomplete: boolean = true
     ) {
         this.affineFormats = affineFormats;
         this.customNotations = customNotations;
