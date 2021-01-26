@@ -7,7 +7,7 @@ import '../src/util/input-event';
 describe('d.m.yyyy / dd.mm.yyyy', () => {
     const format = '[90]{.}[90]{.}[0000]';
     const mask = new Mask(format);
-    const placeholder: String = mask.placeholder();
+    const placeholder: string = mask.placeholder();
 
     it('should initialize mask', () => {
         assert.isNotNull(mask);
@@ -23,7 +23,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const t1 = performance.now();
 
-        console.log("Initializing new Mask took " + (t1 - t0) + " milliseconds.");
+        console.log('Initializing new Mask took ' + (t1 - t0) + ' milliseconds.');
     });
 
     it('measure getOrCreate time', () => {
@@ -37,7 +37,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const t1 = performance.now();
 
-        console.log("Calling getOrCreate took " + (t1 - t0) + " milliseconds.");
+        console.log('Calling getOrCreate took ' + (t1 - t0) + ' milliseconds.');
     });
 
     it('#Mask.placeholder() should return correct placeholder', () => {
@@ -74,7 +74,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -92,7 +92,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -110,7 +110,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -128,7 +128,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -146,7 +146,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -164,7 +164,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -182,7 +182,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -200,7 +200,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -218,7 +218,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -236,7 +236,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -254,7 +254,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -272,7 +272,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -290,7 +290,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -308,7 +308,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -326,7 +326,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -344,7 +344,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -362,7 +362,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -380,7 +380,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -398,7 +398,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -416,7 +416,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -434,7 +434,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -452,7 +452,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -470,7 +470,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -488,7 +488,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -506,7 +506,7 @@ describe('d.m.yyyy / dd.mm.yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 

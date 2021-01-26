@@ -12,7 +12,7 @@ export class EOLState extends State {
         return null;
     }
 
-    public toString(): String {
-        return "EOL";
+    public toString(): string {
+        return 'EOL';
     }
 }

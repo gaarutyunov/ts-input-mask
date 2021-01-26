@@ -16,9 +16,9 @@ export class Compiler {
     ) {
     }
 
-    public compile(formatString: String): State | never {
+    public compile(formatString: string): State | never {
         try {
-            const sanitizedString: String = FormatSanitizer.sanitize(formatString);
+            const sanitizedString: string = FormatSanitizer.sanitize(formatString);
 
             return this._compile(
                 sanitizedString,
@@ -27,21 +27,21 @@ export class Compiler {
                 null
             );
         } catch (e) {
-            throw new Error("Wrong format");
+            throw new Error('Wrong format');
         }
     }
 
     private _compile(
-        formatString: String,
+        formatString: string,
         valuable: boolean,
         fixed: boolean,
-        lastCharacter: String | null
+        lastCharacter: string | null
     ): State {
         if (formatString.isEmpty()) {
             return new EOLState();
         }
 
-        let char: String = formatString.first();
+        const char: string = formatString.first();
 
         switch (char) {
             case '[': {
@@ -201,7 +201,7 @@ export class Compiler {
         );
     }
 
-    private determineInheritedType(lastCharacter: String | null): ValueState.StateType {
+    private determineInheritedType(lastCharacter: string | null): ValueState.StateType {
         switch (lastCharacter) {
             case '0' || '9': {
                 return new ValueState.Numeric();
@@ -224,41 +224,42 @@ export class Compiler {
         }
     }
 
-    private compileWithCustomNotations(char: String, string: String): State | never {
-        for (let customNotation of this.customNotations) {
-            if (customNotation.character) {
-                if (customNotation.isOptional) {
-                    return new OptionalValueState(
-                        this._compile(
-                            string.substring(1),
-                            true,
-                            false,
-                            char
-                        ),
-                        new OptionalValueState.Custom(char, customNotation.characterSet)
-                    );
-                } else {
-                    return new ValueState(
-                        this._compile(
-                            string.substring(1),
-                            true,
-                            false,
-                            char
-                        ),
-                        new ValueState.Custom(char, customNotation.characterSet)
-                    );
-                }
-            }
+    private compileWithCustomNotations(char: string, str: string): State | never {
+        const notation = this.customNotations.find(x => x.character === char);
+
+        if (!notation) throw new Error('Wrong format')
+
+        if (notation.isOptional) {
+            return new OptionalValueState(
+                this._compile(
+                    str.substring(1),
+                    true,
+                    false,
+                    char
+                ),
+                new OptionalValueState.Custom(char, notation.characterSet)
+            );
+        } else {
+            return new ValueState(
+                this._compile(
+                    str.substring(1),
+                    true,
+                    false,
+                    char
+                ),
+                new ValueState.Custom(char, notation.characterSet)
+            );
         }
-        throw new Error("Wrong format");
     }
 
-    private determineTypeWithCustomNotation(lastCharacter: String | null): ValueState.StateType | never {
-        for (let notation of this.customNotations) {
+    private determineTypeWithCustomNotation(
+        lastCharacter: string | null
+    ): ValueState.StateType | never {
+        for (const notation of this.customNotations) {
             if (notation.character === lastCharacter) {
                 return new ValueState.Custom(lastCharacter, notation.characterSet);
             }
         }
-        throw new Error("Wrong format");
+        throw new Error('Wrong format');
     }
 }

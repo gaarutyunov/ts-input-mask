@@ -12,7 +12,7 @@ export class OptionalValueState extends State {
         super(child);
     }
 
-    public accept(character: String): Next | null {
+    public accept(character: string): Next | null {
         if (this.accepts(character)) {
             return new Next(
                 this.nextState(),
@@ -30,22 +30,22 @@ export class OptionalValueState extends State {
         }
     }
 
-    public toString(): String {
+    public toString(): string {
         const type = this.type;
         if (type instanceof OptionalValueState.Numeric) {
-            return "[a] -> " + (!isNull<State>(this.child) ? this.child.toString() : "null");
+            return '[a] -> ' + (!isNull<State>(this.child) ? this.child.toString() : 'null');
         } else if (type instanceof OptionalValueState.Literal) {
-            return "[9] -> " + (!isNull<State>(this.child) ? this.child.toString() : "null");
+            return '[9] -> ' + (!isNull<State>(this.child) ? this.child.toString() : 'null');
         } else if (type instanceof OptionalValueState.AlphaNumeric) {
-            return "[-] -> " + (!isNull<State>(this.child) ? this.child.toString() : "null");
+            return '[-] -> ' + (!isNull<State>(this.child) ? this.child.toString() : 'null');
         } else if (type instanceof OptionalValueState.Custom) {
-            return `[${type.character}] -> ` + (!isNull<State>(this.child) ? this.child.toString() : "null");
+            return `[${type.character}] -> ` + (!isNull<State>(this.child) ? this.child.toString() : 'null');
         } else {
             throw new Error("Doesn't match any supported type");
         }
     }
 
-    private accepts(character: String): boolean | never {
+    private accepts(character: string): boolean | never {
         const type = this.type;
         if (type instanceof OptionalValueState.Numeric) {
             return character.isDigit();
@@ -54,14 +54,14 @@ export class OptionalValueState extends State {
         } else if (type instanceof OptionalValueState.AlphaNumeric) {
             return character.isLetterOrDigit();
         } else if (type instanceof OptionalValueState.Custom) {
-            return type.characterSet.contains(character);
+            return type.characterSet.includes(character);
         } else {
             throw new Error("Doesn't match any supported type");
         }
     }
 }
 
-export module OptionalValueState {
+export namespace OptionalValueState {
     export class StateType {
     }
 
@@ -84,8 +84,8 @@ export module OptionalValueState {
 
     export class Custom extends StateType {
         public constructor(
-            readonly character: String,
-            readonly characterSet: String
+            readonly character: string,
+            readonly characterSet: string[]
         ) {
             super();
         }

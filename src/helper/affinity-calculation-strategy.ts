@@ -19,15 +19,15 @@ export class AffinityCalculation {
         switch (this.strategy) {
             case AffinityCalculationStrategy.WHOLE_STRING: {
                 return mask.apply(
-                    new CaretString(text.string, text.caretPosition),
+                    new CaretString(text.str, text.caretPosition),
                     autocomplete
                 ).affinity
             }
             case AffinityCalculationStrategy.PREFIX: {
                 return mask.apply(
-                    new CaretString(text.string, text.caretPosition),
+                    new CaretString(text.str, text.caretPosition),
                     autocomplete
-                ).formattedText.string.prefixIntersection(text.string).length
+                ).formattedText.str.prefixIntersection(text.str).length
             }
         }
     }

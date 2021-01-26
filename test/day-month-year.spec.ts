@@ -1,5 +1,4 @@
 import {assert} from 'chai';
-import {bdd, runTest} from 'mocha-classes';
 import {CaretString, Mask} from '../src';
 import {performance} from 'perf_hooks';
 import '../src/util/input-event';
@@ -7,7 +6,7 @@ import '../src/util/input-event';
 describe('dd.mm.yyyy mask', () => {
     const format = '[00]{.}[00]{.}[0000]';
     const mask = new Mask(format);
-    const placeholder: String = mask.placeholder();
+    const placeholder: string = mask.placeholder();
 
     it('should initialize mask', () => {
         assert.isNotNull(mask);
@@ -23,7 +22,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const t1 = performance.now();
 
-        console.log("Initializing new Mask took " + (t1 - t0) + " milliseconds.");
+        console.log('Initializing new Mask took ' + (t1 - t0) + ' milliseconds.');
     });
 
     it('measure getOrCreate time', () => {
@@ -37,7 +36,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const t1 = performance.now();
 
-        console.log("Calling getOrCreate took " + (t1 - t0) + " milliseconds.");
+        console.log('Calling getOrCreate took ' + (t1 - t0) + ' milliseconds.');
     });
 
     it('#Mask.placeholder() should return correct placeholder', () => {
@@ -74,7 +73,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -91,7 +90,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -108,7 +107,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -125,7 +124,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -142,7 +141,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -159,7 +158,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -176,7 +175,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -193,7 +192,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -210,7 +209,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -227,7 +226,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -244,7 +243,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -261,7 +260,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -278,7 +277,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -295,7 +294,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -312,7 +311,7 @@ describe('dd.mm.yyyy mask', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 

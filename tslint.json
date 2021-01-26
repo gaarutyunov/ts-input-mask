@@ -34,6 +34,11 @@
       "allow-leading-underscore",
       "ban-keywords",
       "check-format"
-    ]
+    ],
+    "max-classes-per-file": false,
+    "no-namespace": false
+  },
+  "linterOptions": {
+    "exclude": ["test/**/*.spec.ts"]
   }
 }

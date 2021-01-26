@@ -8,14 +8,14 @@ describe('Compiler', () => {
     it('should return correct state', () => {
         const initialState: State = new Compiler([]).compile('[09]{.}[09]{.}19[00]');
         let state: State = initialState;
-        const stateList: Array<State> = [];
+        const stateList: State[] = [];
 
         while (!!state && !(state instanceof EOLState)) {
             stateList.push(state);
             state = state.child;
         }
 
-        const correctnessList: Array<boolean> = stateList.map((value: State, index: number) => {
+        const correctnessList: boolean[] = stateList.map((value: State, index: number) => {
             switch (index) {
                 case 0:
                     return value instanceof ValueState;
@@ -52,7 +52,7 @@ describe('Compiler', () => {
     it('should compile with escape', () => {
         const initialState: State = new Compiler([]).compile('\\[09]{.}');
         let state: State = initialState;
-        const stateList: Array<State> = [];
+        const stateList: State[] = [];
 
         while (!!state && !(state instanceof EOLState)) {
             stateList.push(state);

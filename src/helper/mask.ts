@@ -14,9 +14,9 @@ import {CaretStringIterator} from './caret-string-iterator';
 
 export class Mask {
     private readonly initialState: State = new Compiler(this.customNotations).compile(this.format);
-    static readonly cache: Map<String, Mask> = new Map();
+    static readonly cache: Map<string, Mask> = new Map();
 
-    static getOrCreate(format: String, customNotations: ReadonlyArray<Notation>): Mask {
+    static getOrCreate(format: string, customNotations: ReadonlyArray<Notation>): Mask {
         let cachedMask: Mask | undefined = Mask.cache.get(format);
         if (!cachedMask) {
             cachedMask = new Mask(format, customNotations);
@@ -26,21 +26,12 @@ export class Mask {
     }
 
     constructor(
-        readonly format: String,
+        readonly format: string,
         readonly customNotations?: ReadonlyArray<Notation>
     ) {
     }
 
-    static isValid(format: String, customNotations: ReadonlyArray<Notation>): boolean {
-        try {
-            new Mask(format, customNotations);
-            return true;
-        } catch (e) {
-            return false;
-        }
-    }
-
-    public apply(text: CaretString, autocomplete: Boolean): Mask.Result {
+    public apply(text: CaretString, autocomplete: boolean): Mask.Result {
         const iterator = new CaretStringIterator(text);
 
         let affinity = 0;
@@ -50,7 +41,7 @@ export class Mask {
 
         let state: State = this.initialState;
         let beforeCaret: boolean = iterator.beforeCaret();
-        let character: String | null = iterator.next();
+        let character: string | null = iterator.next();
         let next: Next;
 
         while (!!character) {
@@ -80,14 +71,14 @@ export class Mask {
         }
 
         while (autocomplete && beforeCaret) {
-            let next: Next | null = state.autocomplete();
-            if (next === null) {
+            const nxt: Next | null = state.autocomplete();
+            if (nxt === null) {
                 break;
             }
-            state = next.state;
-            modifiedString += !!next.insert ? next.insert : '';
-            extractedValue += !!next.value ? next.value : '';
-            if (next.insert !== null) {
+            state = nxt.state;
+            modifiedString += !!nxt.insert ? nxt.insert : '';
+            extractedValue += !!nxt.value ? nxt.value : '';
+            if (nxt.insert !== null) {
                 ++modifiedCaretPosition;
             }
         }
@@ -103,7 +94,7 @@ export class Mask {
         );
     }
 
-    public placeholder = (): String => this.appendPlaceholder(this.initialState, '');
+    public placeholder = (): string => this.appendPlaceholder(this.initialState, '');
 
     public acceptableTextLength(): number {
         let state: State | null = this.initialState;
@@ -185,7 +176,7 @@ export class Mask {
         }
     }
 
-    private appendPlaceholder(state: State | null, placeholder: String): String {
+    private appendPlaceholder(state: State | null, placeholder: string): string {
         if (state === null) {
             return placeholder;
         }
@@ -256,7 +247,10 @@ export class Mask {
             }
 
             if (state.type instanceof ValueState.Custom) {
-                return this.appendPlaceholder(state.child, placeholder.concat(state.type.character.toString()));
+                return this.appendPlaceholder(
+                    state.child,
+                    placeholder.concat(state.type.character.toString())
+                );
             }
         }
 
@@ -265,11 +259,11 @@ export class Mask {
 
 }
 
-export module Mask {
+export namespace Mask {
     export class Result {
         constructor(
             readonly formattedText: CaretString,
-            readonly extractedValue: String,
+            readonly extractedValue: string,
             readonly affinity: number,
             readonly complete: boolean
         ) {

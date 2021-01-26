@@ -1,6 +1,6 @@
 export class CaretString {
     public constructor(
-        readonly string: String,
+        readonly str: string,
         readonly caretPosition: number
     ) {
     }

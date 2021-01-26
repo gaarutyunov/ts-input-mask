@@ -15,7 +15,7 @@ export class ValueState extends State {
         this.isElliptical = type instanceof ValueState.Ellipsis;
     }
 
-    public accept(character: String): Next | null {
+    public accept(character: string): Next | null {
         if (!this.accepts(character)) {
             return null;
         }
@@ -36,24 +36,24 @@ export class ValueState extends State {
         }
     }
 
-    public toString(): String {
+    public toString(): string {
         const type = this.type;
         if (type instanceof ValueState.Numeric) {
-            return "[A] -> " + (!isNull<State>(this.child) ? this.child.toString() : "null");
+            return '[A] -> ' + (!isNull<State>(this.child) ? this.child.toString() : 'null');
         } else if (type instanceof ValueState.Literal) {
-            return "[0] -> " + (!isNull<State>(this.child) ? this.child.toString() : "null");
+            return '[0] -> ' + (!isNull<State>(this.child) ? this.child.toString() : 'null');
         } else if (type instanceof ValueState.AlphaNumeric) {
-            return "[_] -> " + (!isNull<State>(this.child) ? this.child.toString() : "null");
+            return '[_] -> ' + (!isNull<State>(this.child) ? this.child.toString() : 'null');
         } else if (type instanceof ValueState.Ellipsis) {
-            return "[...] -> " + (!isNull<State>(this.child) ? this.child.toString() : "null");
+            return '[...] -> ' + (!isNull<State>(this.child) ? this.child.toString() : 'null');
         } else if (type instanceof ValueState.Custom) {
-            return `[${type.character}] -> ` + (!isNull<State>(this.child) ? this.child.toString() : "null");
+            return `[${type.character}] -> ` + (!isNull<State>(this.child) ? this.child.toString() : 'null');
         } else {
             throw new Error("Doesn't match any supported type");
         }
     }
 
-    private accepts(character: String): boolean | never {
+    private accepts(character: string): boolean | never {
         const type = this.type;
         if (type instanceof ValueState.Numeric) {
             return character.isDigit();
@@ -72,14 +72,14 @@ export class ValueState extends State {
                 return false;
             }
         } else if (type instanceof ValueState.Custom) {
-            return type.characterSet.contains(character);
+            return type.characterSet.includes(character);
         } else {
             throw new Error("Doesn't match any supported type");
         }
     }
 }
 
-export module ValueState {
+export namespace ValueState {
     export class StateType {
     }
 
@@ -102,8 +102,8 @@ export module ValueState {
 
     export class Custom extends StateType {
         public constructor(
-            readonly character: String,
-            readonly characterSet: String,
+            readonly character: string,
+            readonly characterSet: string[],
         ) {
             super();
         }

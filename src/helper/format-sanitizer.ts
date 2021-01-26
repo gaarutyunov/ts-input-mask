@@ -1,21 +1,23 @@
 export class FormatSanitizer {
 
-    public static sanitize(formatString: String): String {
+    public static sanitize(formatString: string): string {
         try {
             FormatSanitizer.checkOpenBraces(formatString);
-            const blocks: Array<String> = FormatSanitizer.divideBlocksWithMixedCharacters(FormatSanitizer.getFormatBlocks(formatString));
+            const blocks: string[] = FormatSanitizer.divideBlocksWithMixedCharacters(
+                FormatSanitizer.getFormatBlocks(formatString)
+            );
             return FormatSanitizer.sortFormatBlocks(blocks).join('');
         } catch (e) {
-            throw new Error("Wrong format");
+            throw new Error('Wrong format');
         }
     }
 
-    private static getFormatBlocks(formatString: String): Array<String> {
-        const blocks: Array<String> = new Array<String>();
+    private static getFormatBlocks(formatString: string): string[] {
+        const blocks: string[] = new Array<string>();
         let currentBlock = '';
         let escape = false;
 
-        for (let char of formatString.toCharArray()) {
+        for (const char of formatString.toCharArray()) {
             if (char === '\\') {
                 if (!escape) {
                     escape = true;
@@ -48,13 +50,13 @@ export class FormatSanitizer {
         return blocks;
     }
 
-    private static divideBlocksWithMixedCharacters(blocks: Array<String>): Array<String> {
-        const resultingBlocks: Array<String> = new Array<String>();
+    private static divideBlocksWithMixedCharacters(blocks: string[]): string[] {
+        const resultingBlocks: string[] = new Array<string>();
 
-        for (let block of blocks) {
+        for (const block of blocks) {
             if (block.startsWith('[')) {
                 let blockBuffer = '';
-                for (let blockCharacter of block) {
+                for (const blockCharacter of block) {
                     if (blockCharacter === '[') {
                         blockBuffer += blockCharacter;
                         continue;
@@ -94,7 +96,7 @@ export class FormatSanitizer {
                         }
                     }
 
-                    if (blockCharacter === '-' || blockCharacter == '_') {
+                    if (blockCharacter === '-' || blockCharacter === '_') {
                         if (
                             blockBuffer.contains('0')
                             || blockBuffer.contains('9')
@@ -117,11 +119,11 @@ export class FormatSanitizer {
         return resultingBlocks;
     }
 
-    private static sortFormatBlocks(blocks: Array<String>): Array<String> {
-        const sortedBlocks: Array<String> = new Array<String>();
+    private static sortFormatBlocks(blocks: string[]): string[] {
+        const sortedBlocks: string[] = new Array<string>();
 
         for (let block of blocks) {
-            let sortedBlock: String;
+            let sortedBlock: string;
             if (block.startsWith('[')) {
                 if (block.contains('0') || block.contains('9')) {
                     block = block.replace(/\[/g, '')
@@ -160,12 +162,12 @@ export class FormatSanitizer {
         return sortedBlocks;
     }
 
-    private static checkOpenBraces(string: String): void | never {
+    private static checkOpenBraces(string: string): void | never {
         let escape = false;
         let squareBraceOpen = false;
         let curlyBraceOpen = false;
 
-        for (let char of string.toCharArray()) {
+        for (const char of string.toCharArray()) {
             if (char === '\\') {
                 escape = !escape;
                 continue;
@@ -173,7 +175,7 @@ export class FormatSanitizer {
 
             if (char === '[') {
                 if (squareBraceOpen) {
-                    throw new Error("Wrong format");
+                    throw new Error('Wrong format');
                 }
                 squareBraceOpen = !escape;
             }
@@ -184,7 +186,7 @@ export class FormatSanitizer {
 
             if (char === '{') {
                 if (curlyBraceOpen) {
-                    throw new Error("Wrong format");
+                    throw new Error('Wrong format');
                 }
                 curlyBraceOpen = !escape;
             }

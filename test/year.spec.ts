@@ -1,12 +1,12 @@
 import {CaretString, Mask} from '../src';
-import {performance} from "perf_hooks";
+import {performance} from 'perf_hooks';
 import {assert} from 'chai';
 import '../src/util/input-event';
 
 describe('yy or yyy or yyyy', () => {
     const format = '[0099]';
     const mask: Mask = new Mask(format);
-    const placeholder: String = mask.placeholder();
+    const placeholder: string = mask.placeholder();
 
     it('measure new Mask() time', () => {
         const t0 = performance.now();
@@ -18,7 +18,7 @@ describe('yy or yyy or yyyy', () => {
 
         const t1 = performance.now();
 
-        console.log("Initializing new Mask took " + (t1 - t0) + " milliseconds.");
+        console.log('Initializing new Mask took ' + (t1 - t0) + ' milliseconds.');
     });
 
     it('measure getOrCreate time', () => {
@@ -32,7 +32,7 @@ describe('yy or yyy or yyyy', () => {
 
         const t1 = performance.now();
 
-        console.log("Calling getOrCreate took " + (t1 - t0) + " milliseconds.");
+        console.log('Calling getOrCreate took ' + (t1 - t0) + ' milliseconds.');
     });
 
     it('#new Mask should initialize mask', () => {
@@ -73,7 +73,7 @@ describe('yy or yyy or yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -90,7 +90,7 @@ describe('yy or yyy or yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
         assert.equal(2, result.affinity);
@@ -108,7 +108,7 @@ describe('yy or yyy or yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
         assert.equal(3, result.affinity);
@@ -126,7 +126,7 @@ describe('yy or yyy or yyyy', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
         assert.equal(4, result.affinity);

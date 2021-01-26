@@ -1,12 +1,12 @@
 import {CaretString, Mask} from '../src';
-import {performance} from "perf_hooks";
+import {performance} from 'perf_hooks';
 import {assert} from 'chai';
 import '../src/util/input-event';
 
 describe('y/yy/yyy/(yyyy AC)', () => {
     const format = '[9990] AC';
     const mask: Mask = new Mask(format);
-    const placeholder: String = mask.placeholder();
+    const placeholder: string = mask.placeholder();
 
     it('measure new Mask() time', () => {
         const t0 = performance.now();
@@ -18,7 +18,7 @@ describe('y/yy/yyy/(yyyy AC)', () => {
 
         const t1 = performance.now();
 
-        console.log("Initializing new Mask took " + (t1 - t0) + " milliseconds.");
+        console.log('Initializing new Mask took ' + (t1 - t0) + ' milliseconds.');
     });
 
     it('measure getOrCreate time', () => {
@@ -32,7 +32,7 @@ describe('y/yy/yyy/(yyyy AC)', () => {
 
         const t1 = performance.now();
 
-        console.log("Calling getOrCreate took " + (t1 - t0) + " milliseconds.");
+        console.log('Calling getOrCreate took ' + (t1 - t0) + ' milliseconds.');
     });
 
     it('#new Mask should initialize mask', () => {
@@ -73,7 +73,7 @@ describe('y/yy/yyy/(yyyy AC)', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -90,7 +90,7 @@ describe('y/yy/yyy/(yyyy AC)', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -107,7 +107,7 @@ describe('y/yy/yyy/(yyyy AC)', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -124,7 +124,7 @@ describe('y/yy/yyy/(yyyy AC)', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -141,7 +141,7 @@ describe('y/yy/yyy/(yyyy AC)', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), false);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 
@@ -158,7 +158,7 @@ describe('y/yy/yyy/(yyyy AC)', () => {
 
         const result: Mask.Result = mask.apply(new CaretString(inputString, inputCaret), true);
 
-        assert.equal(expectedString, result.formattedText.string);
+        assert.equal(expectedString, result.formattedText.str);
         assert.equal(expectedCaret, result.formattedText.caretPosition);
         assert.equal(expectedValue, result.extractedValue);
 

@@ -12,12 +12,12 @@ export class CaretStringIterator {
             || (this.currentIndex === 0 && this.caretString.caretPosition === 0);
     }
 
-    public next(): String | null {
-        if (this.currentIndex >= this.caretString.string.length) {
+    public next(): string | null {
+        if (this.currentIndex >= this.caretString.str.length) {
             return null;
         }
 
-        const char: String = this.caretString.string.toCharArray()[this.currentIndex];
+        const char: string = this.caretString.str.toCharArray()[this.currentIndex];
         ++this.currentIndex;
         return char;
     }
