@@ -21,6 +21,10 @@ Based on [RadMadRobot's Input Mask Library](https://github.com/RedMadRobot/input
 8. Visa card numbers: `[0000] [0000] [0000] [0000]`
 9. MM/YY: `[00]{/}[00]`
 
+## Custom notations
+
+Example of custom notations usage can be found in [custom notations test](test/custom-notations.spec.ts)
+
 
 ## Installation
 
