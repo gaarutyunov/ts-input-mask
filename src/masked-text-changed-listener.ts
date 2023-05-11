@@ -7,6 +7,8 @@ import {Mask} from './helper/mask';
 import {MaskAffinity} from './helper/mask-affinity';
 import {InputEvent} from 'input-event';
 
+type FieldELement = HTMLInputElement | HTMLTextAreaElement;
+
 export class MaskedTextChangedListener {
     private readonly primaryMask: Mask;
     private afterText: string = '';
@@ -14,7 +16,7 @@ export class MaskedTextChangedListener {
 
     constructor(
         protected readonly primaryFormat: string,
-        private field: HTMLInputElement,
+        private field: FieldELement,
         protected readonly listener?: MaskedTextChangedListener.ValueListener,
         protected readonly affineFormats: ReadonlyArray<string> = [],
         protected readonly customNotations: ReadonlyArray<Notation> = [],
@@ -28,7 +30,7 @@ export class MaskedTextChangedListener {
 
     static installOn(
         primaryFormat: string,
-        field: HTMLInputElement,
+        field: FieldELement,
         listener?: MaskedTextChangedListener.ValueListener,
         affineFormats: ReadonlyArray<string> = [],
         customNotations: ReadonlyArray<Notation> = [],
@@ -74,7 +76,7 @@ export class MaskedTextChangedListener {
         this.field.removeEventListener('blur', this.handleBlur);
     };
 
-    private _setText(text: string, field: HTMLInputElement): Mask.Result {
+    private _setText(text: string, field: FieldELement): Mask.Result {
         const result: Mask.Result = this.pickMask(text, text.length, this.autocomplete).apply(
             new CaretString(text, text.length),
             this.autocomplete
@@ -152,14 +154,14 @@ export class MaskedTextChangedListener {
         );
     }
 
-    private addEvents(field: HTMLInputElement): void {
+    private addEvents(field: FieldELement): void {
         field.addEventListener('input', this.handleInputChange);
         field.addEventListener('focus', this.handleFocus);
         field.addEventListener('blur', this.handleBlur);
     }
 
     private handleInputChange = (ev: HTMLElementEventMap['input']): void => {
-        this.onTextChanged((ev.target as HTMLInputElement).value, ev);
+        this.onTextChanged((ev.target as FieldELement).value, ev);
     };
 
     private handleFocus = () => this.onFocusChange(true);

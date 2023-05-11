@@ -40,6 +40,18 @@ describe('MaskedTextChangedListener', () => {
         assert.equal(input.value, '12/31');
     });
 
+    it('Formats value in a textarea', () => {
+        const textarea = document.createElement('textarea');
+        document.body.appendChild(textarea);
+        MaskedTextChangedListener.installOn(
+            format,
+            textarea,
+            valueListener,
+        );
+        fireEvent.input(textarea, { target: { value: 'a12b31' } });
+        assert.equal(textarea.value, '12/31');
+    });
+
     it('Do nothing after format by mask and dispose', () => {
         const input = screen.queryByTestId<HTMLInputElement>('input')!;
         fireEvent.input(input, { target: { value: '1231' } });
