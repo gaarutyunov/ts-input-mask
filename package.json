@@ -8,8 +8,8 @@
     "dist"
   ],
   "scripts": {
-    "test": "mocha -r ts-node/register test/**/*.spec.ts",
-    "test:coverage": "nyc -r lcov -e .ts -x \\\"**/*.spec.ts\\\" mocha -r ts-node/register test/**/*.spec.ts && nyc report",
+    "test": "mocha -r ts-node/register -r global-jsdom/register test/**/*.spec.ts",
+    "test:coverage": "nyc -r lcov -e .ts -x \\\"**/*.spec.ts\\\" mocha -r ts-node/register -r global-jsdom/register test/**/*.spec.ts && nyc report",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "lint": "tslint --project \"./tsconfig.json\"",
@@ -37,14 +37,22 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@testing-library/dom": "^9.3.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/chai": "4.2.10",
     "@types/mocha": "7.0.2",
     "@types/node": "13.9.0",
+    "@types/sinon": "^10.0.15",
+    "@types/sinon-chai": "^3.2.9",
     "chai": "4.2.0",
+    "global-jsdom": "^9.0.1",
+    "jsdom": "^22.0.0",
     "mocha": "7.1.0",
     "mocha-classes": "0.1.2",
     "nyc": "15.0.0",
     "semantic-release": "^17.3.7",
+    "sinon": "^15.0.4",
+    "sinon-chai": "^3.7.0",
     "ts-node": "8.6.2",
     "tslint": "6.0.0",
     "typescript": "3.7.5"

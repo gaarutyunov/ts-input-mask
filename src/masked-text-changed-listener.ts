@@ -68,6 +68,12 @@ export class MaskedTextChangedListener {
         return result;
     }
 
+    public dispose = (): void => {
+        this.field.removeEventListener('input', this.handleInputChange);
+        this.field.removeEventListener('focus', this.handleFocus);
+        this.field.removeEventListener('blur', this.handleBlur);
+    };
+
     private _setText(text: string, field: HTMLInputElement): Mask.Result {
         const result: Mask.Result = this.pickMask(text, text.length, this.autocomplete).apply(
             new CaretString(text, text.length),
@@ -147,16 +153,18 @@ export class MaskedTextChangedListener {
     }
 
     private addEvents(field: HTMLInputElement): void {
-        field.addEventListener('input', (ev: HTMLElementEventMap['input']) => {
-            this.onTextChanged(field.value, ev);
-        });
-        field.addEventListener('focus', (ev: HTMLElementEventMap['focus']) => {
-            this.onFocusChange(true);
-        });
-        field.addEventListener('blur', (ev: HTMLElementEventMap['blur']) => {
-            this.onFocusChange(false);
-        });
+        field.addEventListener('input', this.handleInputChange);
+        field.addEventListener('focus', this.handleFocus);
+        field.addEventListener('blur', this.handleBlur);
     }
+
+    private handleInputChange = (ev: HTMLElementEventMap['input']): void => {
+        this.onTextChanged((ev.target as HTMLInputElement).value, ev);
+    };
+
+    private handleFocus = () => this.onFocusChange(true);
+
+    private handleBlur = () => this.onFocusChange(false);
 
     private onFocusChange(hasFocus: boolean): void {
         if (this.autocomplete && hasFocus) {
