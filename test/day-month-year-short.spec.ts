@@ -1,5 +1,4 @@
 import {assert} from 'chai';
-import {bdd, runTest} from 'mocha-classes';
 import {CaretString, Mask} from '../src';
 import {performance} from 'perf_hooks';
 import '../src/util/input-event';

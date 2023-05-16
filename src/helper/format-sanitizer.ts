@@ -162,12 +162,12 @@ export class FormatSanitizer {
         return sortedBlocks;
     }
 
-    private static checkOpenBraces(string: string): void | never {
+    private static checkOpenBraces(str: string): void | never {
         let escape = false;
         let squareBraceOpen = false;
         let curlyBraceOpen = false;
 
-        for (const char of string.toCharArray()) {
+        for (const char of str.toCharArray()) {
             if (char === '\\') {
                 escape = !escape;
                 continue;
