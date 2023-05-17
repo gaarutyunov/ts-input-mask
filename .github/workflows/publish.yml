@@ -1,0 +1,28 @@
+name: NPM Publish
+
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm install
+      - run: npm run test:coverage
+      - name: Upload coverage to Codecov
+        if: github.repository_owner == 'gaarutyunov'
+        uses: codecov/codecov-action@v3
+        with:
+          file: coverage/lcov.info
+      - run: npm run build
+      - uses: JS-DevTools/npm-publish@v2
+        if: github.repository_owner == 'gaarutyunov'
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
